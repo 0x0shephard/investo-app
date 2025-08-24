@@ -1,0 +1,58 @@
+/* Price Chart Styles */
+.price-chart {
+  height: 400px;
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.price-chart canvas {
+  flex: 1;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  background: white;
+}
+
+.chart-controls {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-info {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.current-price {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 1rem;
+}
+
+.price-change {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.price-change.positive {
+  color: #10b981;
+}
+
+.price-change.negative {
+  color: #ef4444;
+}
+
+/* Chart loading state */
+.price-chart:empty::before {
+  content: "Loading chart...";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #6b7280;
+  font-size: 1rem;
+}
