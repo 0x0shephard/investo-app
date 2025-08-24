@@ -1,4 +1,6 @@
 import { auth } from '../lib/supabase'
+import AdminDashboard from './AdminDashboard'
+import PlayerDashboard from './PlayerDashboard'
 
 export default function Dashboard({ user, onLogout }) {
   const handleLogout = async () => {
@@ -6,32 +8,10 @@ export default function Dashboard({ user, onLogout }) {
     onLogout()
   }
 
-  return (
-    <div className="dashboard">
-      <div className="dashboard-header">
-        <h1 className="dashboard-title">Investomania</h1>
-        <div className="user-info">
-          <span className="username">
-            Welcome, {user.profile?.username || user.user?.email}
-          </span>
-          <button onClick={handleLogout} className="btn-secondary">
-            Logout
-          </button>
-        </div>
-      </div>
-
-      <div className="dashboard-content">
-        <div className="welcome-card">
-          <h3>Welcome to Investomania!</h3>
-          <p>The ultimate trading challenge awaits.</p>
-          <p style={{ fontSize: '0.875rem', color: '#b0bec5', marginTop: '1rem' }}>
-            User ID: {user.user?.id}
-          </p>
-          <p style={{ fontSize: '0.875rem', color: '#b0bec5' }}>
-            Username: {user.profile?.username || 'Not set'}
-          </p>
-        </div>
-      </div>
-    </div>
-  )
+  // Route to appropriate dashboard based on user role
+  if (user.profile?.role === 'admin') {
+    return <AdminDashboard user={user} onLogout={handleLogout} />
+  } else {
+    return <PlayerDashboard user={user} onLogout={handleLogout} />
+  }
 }
